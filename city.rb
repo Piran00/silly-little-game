@@ -1,6 +1,6 @@
 require 'C:\Users\jakob\Desktop\silly little game made by silly little people\fighting_state.rb'
 puts 'you finally made it to the city'
-statcheet = File.open('C:\Users\jakob\Desktop\silly little game made by silly little people\player_stats.txt')
+statcheet = File.open('/home/piranha/silly-little-game/player_stats.txt')
 stats_list = statcheet.read
 statcheet.close
 stats = stats_list.split(' ')
@@ -83,7 +83,7 @@ when 'u', 'U'
         lines[2] = "#{player_max_dmg.to_i}\n"
         lines[10] = "#{upgrade_cost.to_i}\n"
         lines[8] = "#{total_player_gold}\n"
-        filee.rewind
+        filee.rewind/home/piranha/silly-little-game/
         filee.write(lines.join)
       end
     when 'C', 'c'
@@ -153,5 +153,5 @@ when 'CAS','Cas','cas'
   load' '
   exit!
 end
-load 'C:\Users\jakob\Desktop\silly little game made by silly little people\fighting_state.rb'
+load 'fighting_state.rb'
 exit!

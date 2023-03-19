@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 # deffing fighting state
-require 'C:\Users\jakob\Desktop\silly little game made by silly little people\city'
-require 'etc'
-require 'io/console'
 
 def win?(current_hp, filee, total_player_gold)
   lines = filee.each_line.to_a
@@ -37,7 +34,7 @@ end
 
 
 def fighting(enemy_file_path)
-  statcheet = File.open('C:\Users\jakob\Desktop\silly little game made by silly little people\player_stats.txt')
+  statcheet = File.open('/home/piranha/silly-little-game/player_stats.txt')
   stats_list = statcheet.read
   statcheet.close
   stats = stats_list.split(' ')
@@ -67,36 +64,37 @@ def fighting(enemy_file_path)
   while current_hp.positive? || current_enemy_hp.positive?
     puts "you currently have #{current_hp}hp\nand the enemy has#{current_enemy_hp}\nwhat do you choose to do\nFight(f)\nHeal(h)\nDoge(d)"
     dmg_to_enemy = rand(player_min_dmg.to_i..player_max_dmg.to_i)
-    puts dmg_to_enemy
+    dmg_to_player = rand(enemy_dmg_min..enemy_dmg_max)
+    puts "#{dmg_to_enemy}dmg"
     player_fight_state = gets.chomp
     case player_fight_state
     when 'f'
       if rand(0..100) >= player_crit_chance
         current_enemy_hp -= dmg_to_enemy.to_i
-        puts "you dealt #{dmg_to_enemy} the enemy now has #{current_enemy_hp} hp"
-        if current_hp.positive? && current_enemy_hp.negative?
-          puts "you win you still have #{current_hp}hp"
-          puts "you gained #{enemy_gold_reward} gold"
-          total_player_gold += enemy_gold_reward
-          File.open('player_stats.txt', 'r+') do |filee|
-            win?(current_hp, filee, total_player_gold)
-          end
-          puts total_player_gold
-          load('C:\Users\jakob\Desktop\silly little game made by silly little people\city.rb')
-          exit!
-        end
+        puts "you deal #{dmg_to_enemy}dmg"
       else
         current_enemy_hp -= dmg_to_enemy.to_i * player_crit_dmg
         puts "you crit and deal #{player_crit_dmg} times dmg totaling to #{dmg_to_enemy * player_crit_dmg}"
       end
-      current_hp -= rand(enemy_dmg_min..enemy_dmg_max)
-      puts "the enemy attacks you now have #{current_hp} hp "
+      current_hp -= dmg_to_player
+      print "the enemy attacks and deals #{dmg_to_player}dmg"
+      if current_hp.positive? && current_enemy_hp.negative?
+        puts "you win you still have #{current_hp}hp"
+        puts "you gained #{enemy_gold_reward} gold"
+        total_player_gold += enemy_gold_reward
+        File.open('player_stats.txt', 'r+') do |filee|
+          win?(current_hp, filee, total_player_gold)
+        end
+        puts total_player_gold
+        load('city.rb')
+        exit!
+      end
     when 'h'
       if rand(0..100) >= player_crit_chance
         current_hp += player_heal * 2
         current_hp -= rand(enemy_dmg_min..enemy_dmg_max)
         current_hp = over_heal(current_hp, play_total_hp)
-        puts "you critical heal and are now at #{current_hp}"
+        puts "you critical heal for #{player_heal}hp and are now at #{current_hp}"
       else
         current_hp += player_heal
         current_hp -= rand(enemy_dmg_min..enemy_dmg_max)
@@ -108,12 +106,16 @@ def fighting(enemy_file_path)
       if rand(0..100) >= player_doge_chance
         current_hp -= rand(enemy_dmg_min...enemy_dmg_max).to_i - player_dmg_rduction.to_i
         puts 'the enemy attacks'
-        puts "you now have #{current_hp}hp"
       else
         puts 'you skillfully doge'
-        current_enemy_hp -= dmg_to_enemy / 2
+        if rand(0..100) >= player_crit_chance
+          current_enemy_hp -= dmg_to_enemy / 2
+          print "you hit "
+        else
+          current_enemy_hp -= dmg_to_enemy * player_crit_dmg * 2
+          print "you crit-doge dealing #{dmg_to_enemy * player_crit_dmg * 2}dmg to the enemy"
+        end
       end
-    end
     if current_hp.positive? && current_enemy_hp.negative?
       puts "you win you still have #{current_hp}hp"
       puts "you gained #{enemy_gold_reward} "
@@ -122,7 +124,7 @@ def fighting(enemy_file_path)
         win?(current_hp, filee, total_player_gold)
       end
       puts total_player_gold
-      load('C:\Users\jakob\Desktop\silly little game made by silly little people\city.rb')
+      load('city.rb')
       exit!
     end
     if current_hp.negative? && current_enemy_hp.positive?
@@ -136,7 +138,7 @@ puts 'Goblin'
 enemy_name = gets.chomp
 case enemy_name
 when 'goblin' # is sus
-  fighting('C:\Users\jakob\Desktop\silly little game made by silly little people\goblin.txt')
+  fighting('goblin.txt')
 when 'skeleton'
 
 end
