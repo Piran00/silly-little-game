@@ -1,4 +1,4 @@
-statcheet = File.open('C:\Users\jakob\Desktop\silly little game made by silly little people\player_stats.txt')
+statcheet = File.open('player_stats.txt')
 stats_list = statcheet.read
 statcheet.close
 stats = stats_list.split(' ')
@@ -45,7 +45,7 @@ while current_hp.positive? && boss_hp.positive?
           filee.rewind
           filee.write(lines.join)
         end
-        load 'C:\Users\jakob\Desktop\silly little game made by silly little people\city.rb'
+        load 'city.rb'
         exit!
       else
       current_hp -= rand(boss_min_dmg..boss_max_dmg)
@@ -78,3 +78,4 @@ while current_hp.positive? && boss_hp.positive?
 
   end
   end
+end

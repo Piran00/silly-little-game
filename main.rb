@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 # requirements
-require 'C:\Users\jakob\Desktop\silly little game made by silly little people\city.rb'
+
 require 'etc'
-require 'io/console'
 # getting the players name from etc
 name_of_user = Etc.getlogin
 # greeting the player
@@ -17,7 +16,7 @@ while name_of_user_correct != 'y'
   name_of_user_correct = gets.chomp
 end
 
-statcheet = File.open('C:\Users\jakob\Desktop\silly little game made by silly little people\player_stats.txt')
+statcheet = File.open('player_stats.txt')
 stats_list = statcheet.read
 statcheet.close
 stats = stats_list.split(' ')
@@ -78,7 +77,7 @@ while current_hp.positive? || current_enemy_hp.positive?
   end
   if current_hp.positive? && current_enemy_hp.negative?
     puts "you win you still have #{current_hp}hp"
-    load('C:\Users\jakob\Desktop\silly little game made by silly little people\city.rb')
+    load('city.rb')
     exit!
   end
   if current_hp.negative? && current_enemy_hp.positive?

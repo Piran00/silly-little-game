@@ -1,4 +1,3 @@
-require 'C:\Users\jakob\Desktop\silly little game made by silly little people\fighting_state.rb'
 puts 'you finally made it to the city'
 statcheet = File.open('/home/piranha/silly-little-game/player_stats.txt')
 stats_list = statcheet.read

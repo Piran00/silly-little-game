@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+
 
 # deffing fighting state
 
@@ -17,6 +17,7 @@ def over_heal(hp, max_hp)
     return hp
   end
 end
+
 def coin_animation(total_player_gold)
   puts 'You have    coins'
   coins = 0
@@ -118,7 +119,7 @@ def fighting(enemy_file_path)
       end
     if current_hp.positive? && current_enemy_hp.negative?
       puts "you win you still have #{current_hp}hp"
-      puts "you gained #{enemy_gold_reward} "
+      puts "you gained #{enemy_gold_reward}gold "
       total_player_gold += enemy_gold_reward
       File.open('player_stats.txt', 'r+') do |filee|
         win?(current_hp, filee, total_player_gold)
@@ -133,14 +134,5 @@ def fighting(enemy_file_path)
     end
   end
 end
-puts 'what do you want to fight?\n'
-puts 'Goblin'
-enemy_name = gets.chomp
-case enemy_name
-when 'goblin' # is sus
-  fighting('goblin.txt')
-when 'skeleton'
-
 end
-
-puts enemy_name
+fighting("goblin.txt")
