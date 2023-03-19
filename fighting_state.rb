@@ -60,10 +60,12 @@ def fighting(enemy_file_path)
   enemy_gold_reward = enemy_hp / 2
   current_hp = stats[9].to_i
   current_enemy_hp = enemy_hp
-
+  
   puts 'you have entered combat'
+  current_enemy_hp ||= 0
+  current_hp ||= 0
   while current_hp.positive? || current_enemy_hp.positive?
-    puts "you currently have #{current_hp}hp\nand the enemy has#{current_enemy_hp}\nwhat do you choose to do\nFight(f)\nHeal(h)\nDoge(d)"
+    puts "you currently have #{current_hp}hp\nand the enemy has#{current_enemy_hp}hp\nwhat do you choose to do\nFight(f)\nHeal(h)\nDoge(d)"
     dmg_to_enemy = rand(player_min_dmg.to_i..player_max_dmg.to_i)
     dmg_to_player = rand(enemy_dmg_min..enemy_dmg_max)
     puts "#{dmg_to_enemy}dmg"
@@ -93,13 +95,13 @@ def fighting(enemy_file_path)
     when 'h'
       if rand(0..100) >= player_crit_chance
         current_hp += player_heal * 2
-        current_hp -= rand(enemy_dmg_min..enemy_dmg_max)
-        current_hp = over_heal(current_hp, play_total_hp)
+        current_hp -= rand(enemy_dmg_min..enemy_dmg_max).to_i
+        current_hp = over_heal(current_hp, play_total_hp).to_i
         puts "you critical heal for #{player_heal}hp and are now at #{current_hp}"
       else
         current_hp += player_heal
-        current_hp -= rand(enemy_dmg_min..enemy_dmg_max)
-        current_hp = over_heal(current_hp, play_total_hp)
+        current_hp -= rand(enemy_dmg_min..enemy_dmg_max).to_i
+        current_hp = over_heal(current_hp, play_total_hp).to_i
         puts "you heal your hp back up to #{current_hp}"
       end
       puts "the enemy attacks and you now have #{current_hp}hp"
@@ -119,7 +121,7 @@ def fighting(enemy_file_path)
       end
     if current_hp.positive? && current_enemy_hp.negative?
       puts "you win you still have #{current_hp}hp"
-      puts "you gained #{enemy_gold_reward}gold "
+      puts "you gained #{enemy_gold_reward}gold\n you now have #{total_player_gold}gold "
       total_player_gold += enemy_gold_reward
       File.open('player_stats.txt', 'r+') do |filee|
         win?(current_hp, filee, total_player_gold)
