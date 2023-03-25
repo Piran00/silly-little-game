@@ -138,7 +138,7 @@ when 'u', 'U'
     end
   end
 when 'BF', 'bf'
-  puts "are you sure you want to enter the bossfight\n.n"
+  print "are you sure you want to enter the bossfight\n(y/n)? "
   yes_no = gets.chomp
   case yes_no
   when 'y'

@@ -2,7 +2,7 @@ i = 0
 s_time = 0.01
 def win_animation(total_player_gold, i , s_time)
   increase_amount = if total_player_gold >= 10_000
-                      total_player_gold. 100
+                      total_player_gold / 100
                     else
                       5
                     end

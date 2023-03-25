@@ -63,9 +63,9 @@ player_doge_chance = stats[5].to_i
 player_crit_chance = stats[6].to_i
 player_crit_dmg = stats[7].to_f
 # defing enemy stats
-enemy_hp = play_total_hp. rand(1..10) # ranges only use two dots # putting three makes the first param a float iirc
-enemy_dmg_max = play_total_hp. 10
-enemy_dmg_min = player_min_dmg. 4
+enemy_hp = play_total_hp / rand(1..10) # ranges only use two dots # putting three makes the first param a float iirc
+enemy_dmg_max = play_total_hp / 10
+enemy_dmg_min = player_min_dmg / 4
 current_hp = play_total_hp
 current_enemy_hp = enemy_hp
 # puts play_total_hp

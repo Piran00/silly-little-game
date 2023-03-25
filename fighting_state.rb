@@ -57,7 +57,7 @@ def fighting(enemy_file_path)
   enemy_hp = enemy_stats[0].to_i
   enemy_dmg_max = enemy_stats[1].to_i
   enemy_dmg_min = enemy_stats[2].to_i
-  enemy_gold_reward = enemy_hp. 2
+  enemy_gold_reward = enemy_hp / 2
   current_hp = stats[9].to_i
   current_enemy_hp = enemy_hp
   
@@ -112,7 +112,7 @@ def fighting(enemy_file_path)
       else
         puts 'you skillfully doge'
         if rand(0..100) >= player_crit_chance
-          current_enemy_hp -= dmg_to_enemy. 2
+          current_enemy_hp -= dmg_to_enemy / 2
           print "you hit "
         else
           current_enemy_hp -= dmg_to_enemy * player_crit_dmg * 2
