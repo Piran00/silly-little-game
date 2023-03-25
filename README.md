@@ -1,1 +1,1 @@
-"# silly-little-game" 
+# silly-little-game

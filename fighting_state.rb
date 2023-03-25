@@ -35,7 +35,7 @@ end
 
 
 def fighting(enemy_file_path)
-  statcheet = File.open('/home/piranha/silly-little-game/player_stats.txt')
+  statcheet = File.open(./player_stats.txt')
   stats_list = statcheet.read
   statcheet.close
   stats = stats_list.split(' ')

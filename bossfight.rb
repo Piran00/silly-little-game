@@ -19,7 +19,7 @@ upgrade_cost = stats[10].to_i
 #boss stats
 boss_hp = 1000
 boss_min_dmg = 70
-boss_max_dmg = play_total_hp/ 2
+boss_max_dmg = play_total_h / 2
 boss_dmg_reduction = 20#%
 current_boss_hp = boss_hp
 doge_dmg = player_max_dmg / 2
